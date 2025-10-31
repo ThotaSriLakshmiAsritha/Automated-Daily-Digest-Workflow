@@ -144,6 +144,7 @@ Main Pollutant: PM2.5
 - **Weather + AQI** nodes are merged to create a concise **Gmail summary**.  
 - Optionally, you can **combine all outputs** (News + Quote + Weather + AQI) into a single WhatsApp message for simplicity.
 
+
 **💻 Example n8n Function Node Code:**
 ```javascript
 const news = $json.news || '';
@@ -153,11 +154,17 @@ const aqi = $json.aqi || '';
 return [{ json: { combinedMessage: `${news}\n\n${quote}\n\n${weather}\n\n${aqi}` } }];
 
 ---
+## 🧾 5. Example Combined Digest
 
-🧾 5. Example Combined Digest
-🌤️ Weather — Hyderabad: 30°C, Clear skies ☀️  
-🌫️ AQI: 118 (Moderate), Main Pollutant: PM2.5  
+Here’s how the final combined daily message looks once all branches (Weather + AQI) are merged:
+
+🌤️ Weather — Hyderabad: 30°C, Clear skies ☀️
+🌫️ AQI: 118 (Moderate)
+Main Pollutant: PM2.5
 💨 Consider indoor exercises today.
+
+> 💡 **Tip:**  
+> You can include this message as part of your WhatsApp or Gmail daily digest output in n8n using a Merge or Function node.
 
 ---
 
