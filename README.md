@@ -145,14 +145,6 @@ Main Pollutant: PM2.5
 - Optionally, you can **combine all outputs** (News + Quote + Weather + AQI) into a single WhatsApp message for simplicity.
 
 
-**💻 Example n8n Function Node Code:**
-```javascript
-const news = $json.news || '';
-const quote = $json.quote || '';
-const weather = $json.weather || '';
-const aqi = $json.aqi || '';
-return [{ json: { combinedMessage: `${news}\n\n${quote}\n\n${weather}\n\n${aqi}` } }];
-
 ---
 ## 🧾 5. Example Combined Digest
 
