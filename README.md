@@ -219,10 +219,24 @@ You can easily expand this workflow with more smart features and integrations:
 
 ---
 
-## 9.Visuals
+## 9.Visuals and Outputs
 
 <img width="1367" height="618" alt="image" src="https://github.com/user-attachments/assets/8727ae3b-a44a-488f-94cd-532ea8c2eb33" />
 
+<img width="607" height="1350" alt="image" src="https://github.com/user-attachments/assets/3fdd9fc2-6401-4321-8a07-8b50a48456a9" />
+
+<img width="607" height="1350" alt="image" src="https://github.com/user-attachments/assets/02282913-9417-4379-9261-25c4ad84ab47" />
+
+<img width="975" height="315" alt="image" src="https://github.com/user-attachments/assets/cf704b00-169c-44f4-b27c-f6777aaa6aad" />
+
+![WhatsApp Image 2025-10-31 at 21 23 15_2f13ef7c](https://github.com/user-attachments/assets/d67bbdd9-c457-4ada-a64e-888b1c286f89
+
+---
+
+## 👩‍💻 Author
+**T.S.L. Asritha**  
+_Built using n8n, Twilio, Google Gemini, OpenWeather, IQAir, and NewsAPI_  
+📅 Project Year: **2025**
 
 
 
