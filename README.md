@@ -217,6 +217,11 @@ You can easily expand this workflow with more smart features and integrations:
 > 💡 **Pro Tip:**  
 > Use an **n8n Merge Node** to compile all your branch outputs (News, Quote, Weather, AQI) into one unified message for a single WhatsApp or Gmail summary.
 
+---
+
+## 9.Visuals
+
+<img width="1367" height="618" alt="image" src="https://github.com/user-attachments/assets/8727ae3b-a44a-488f-94cd-532ea8c2eb33" />
 
 
 
