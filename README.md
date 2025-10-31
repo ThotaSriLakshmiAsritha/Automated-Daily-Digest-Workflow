@@ -1,4 +1,4 @@
-# 🧠 Productivity Companion — Automated Daily Digest Workflow (WhatsApp & Email)
+# 🧠 Automated Daily Digest Workflow
 
 ![n8n](https://img.shields.io/badge/Built%20with-n8n-orange?style=for-the-badge)
 ![Twilio](https://img.shields.io/badge/Powered%20by-Twilio-green?style=for-the-badge)
