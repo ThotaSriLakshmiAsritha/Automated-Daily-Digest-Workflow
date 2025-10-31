@@ -50,3 +50,5 @@ All data is refined through **Google Gemini AI**, ensuring conversational tone, 
 ---
 
 ## 🧭 High-Level Workflow
+<img width="592" height="322" alt="image" src="https://github.com/user-attachments/assets/03bd8881-b022-48a1-ae19-95b48f50f39e" />
+
