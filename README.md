@@ -238,6 +238,13 @@ Check out the Automated Daily Digest Workflow in action!
 
 ---
 
+##🔗 GitHub File:
+https://github.com/ThotaSriLakshmiAsritha/Automated-Daily-Digest-Workflow/blob/main/Green%20Pale%20Simple%20Pastel%20Watercolor%20Leaves%20Presentation_compressed%20(1).pdf
+
+
+---
+
+
 ## 👩‍💻 Author
 **T.S.L. Asritha**  
 _Built using n8n, Twilio, Google Gemini, OpenWeather, IQAir, and NewsAPI_  
