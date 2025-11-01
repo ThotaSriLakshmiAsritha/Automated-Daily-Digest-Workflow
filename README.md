@@ -227,6 +227,12 @@ You can easily expand this workflow with more smart features and integrations:
 
 ---
 
+
+[![Watch the Demo Video](assets/demo-thumbnail.png)](https://github.com/ThotaSriLakshmiAsritha/Automated-Daily-Digest-Workflow/raw/main/video/demo.mp4)
+
+
+---
+
 ## 👩‍💻 Author
 **T.S.L. Asritha**  
 _Built using n8n, Twilio, Google Gemini, OpenWeather, IQAir, and NewsAPI_  
