@@ -228,7 +228,7 @@ You can easily expand this workflow with more smart features and integrations:
 ---
 
 
-[![Watch the Demo Video](assets/demo-thumbnail.png)](https://github.com/ThotaSriLakshmiAsritha/Automated-Daily-Digest-Workflow/raw/main/video/demo.mp4)
+[![Watch the Demo Video]https://github.com/ThotaSriLakshmiAsritha/Automated-Daily-Digest-Workflow/blob/main/video%20demo.mp4
 
 
 ---
