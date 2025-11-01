@@ -1,0 +1,697 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        32
+      ],
+      "id": "236081a5-fd85-4378-891a-ef0180f15f11",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://wttr.in/Hyderabad?format=j1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        64
+      ],
+      "id": "efeb05c9-413e-46ff-837a-8645621bf4e0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"city\": \"Hyderabad\",\n  \"temperature\": \"={{$json.current_condition[0].temp_C}}\",\n  \"description\": \"={{$json.current_condition[0].weatherDesc[0].value}}\",\n  \"humidity\": \"={{$json.current_condition[0].humidity}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        608,
+        80
+      ],
+      "id": "a7beb65a-5113-4040-83c3-a752fb573992",
+      "name": "Format Weather"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a friendly AI assistant. Based on the following weather data, give a short, engaging recommendation for the day:\n\nCity: {{$json[\"city\"]}}\nTemperature: {{$json[\"temperature\"]}}°C\nCondition: {{$json[\"description\"]}}\nHumidity: {{$json[\"humidity\"]}}%\n\n]}}\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        64
+      ],
+      "id": "d51c7b25-b4b6-4dd9-9fd3-03e038eb070f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        288
+      ],
+      "id": "a117b719-35a1-4448-be59-e21de7af5547",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "uGC3uIvyNkEyICmc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.quotable.io/random",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        96,
+        432
+      ],
+      "id": "d95f9720-c94a-4e2d-964c-f1c4615971c8",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"quote\": \"={{$json.content}}\",\n  \"author\": \"={{$json.author}}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        448
+      ],
+      "id": "6abb1009-75aa-4ea7-9279-052d50ce14fb",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    quoteText: `\"${$json.quote}\" — ${$json.author}`\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        448
+      ],
+      "id": "76532656-2a14-4ea0-9a26-63a4004eb755",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a friendly AI assistant. Based on the following inspirational quote, provide:\n\n1. A short, engaging daily message for the user.\n2. A friendly action or reflection suggestion related to the quote.\n\nQuote:{{ $json.quoteText }}\n\n\nKeep it light, fun, and easy to read. \nExample output: “Take a moment today to enjoy a small joy in your life!”\n\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        976,
+        480
+      ],
+      "id": "0e3cdefc-cad1-444c-b109-0f4c8b725a1e",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        976,
+        656
+      ],
+      "id": "54dca58a-947c-4840-b11d-a21116e22b38",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "uGC3uIvyNkEyICmc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.currentsapi.services/v1/latest-news?language=en&country=IN&apiKey=NJl9XQlhE55AeR7Dm-_bwshngZZFyY8R8E7q9KTCJg4M9M4l",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        224,
+        -192
+      ],
+      "id": "aeff670a-997f-48cf-9176-1ca6919bd37f",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"name\": \"Set Top 3 News\",\n  \"type\": \"n8n-nodes-base.set\",\n  \"typeVersion\": 2,\n  \"position\": [600, 300],\n  \"parameters\": {\n    \"values\": {\n      \"string\": [\n        { \"name\": \"title1\", \"value\": \"={{$json.news[0]?.title}}\" },\n        { \"name\": \"desc1\",  \"value\": \"={{$json.news[0]?.description}}\" },\n        { \"name\": \"url1\",   \"value\": \"={{$json.news[0]?.url}}\" },\n\n        { \"name\": \"title2\", \"value\": \"={{$json.news[1]?.title}}\" },\n        { \"name\": \"desc2\",  \"value\": \"={{$json.news[1]?.description}}\" },\n        { \"name\": \"url2\",   \"value\": \"={{$json.news[1]?.url}}\" },\n\n        { \"name\": \"title3\", \"value\": \"={{$json.news[2]?.title}}\" },\n        { \"name\": \"desc3\",  \"value\": \"={{$json.news[2]?.description}}\" },\n        { \"name\": \"url3\",   \"value\": \"={{$json.news[2]?.url}}\"}\n      ]\n    }\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        640,
+        -192
+      ],
+      "id": "ef2cbb01-7815-4f56-83cc-11c3f06a9996",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=📰 Transform the top 3 news stories below into a friendly, engaging newsletter snippet. Use emojis, short sentences, and a cheerful tone. Include the title, description, and a 'Read more' link for each story.\n\n1️⃣ Title: {{$json[\"title1\"]}}\n   Description: {{$json[\"desc1\"]}}\n   Link: {{$json[\"url1\"]}}\n\n2️⃣ Title: {{$json[\"title2\"]}}\n   Description: {{$json[\"desc2\"]}}\n   Link: {{$json[\"url2\"]}}\n\n3️⃣ Title: {{$json[\"title3\"]}}\n   Description: {{$json[\"desc3\"]}}\n   Link: {{$json[\"url3\"]}}\n\nFormat the output like a newsletter that is ready to be sent to readers, making it concise, friendly, and engaging.\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.7,
+      "position": [
+        976,
+        -144
+      ],
+      "id": "7aac5311-ac1c-43f6-a4a9-bc8c4a4a440d",
+      "name": "Basic LLM Chain2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        848,
+        -32
+      ],
+      "id": "e018c5d8-1cfd-4c27-81bc-932082c123ed",
+      "name": "Google Gemini Chat Model4",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "uGC3uIvyNkEyICmc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "whatsapp:+12297380963",
+        "to": "whatsapp:+919493060886",
+        "message": "={{ $json.text }}{{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1744,
+        224
+      ],
+      "id": "d6de5792-53bb-449f-8647-c8c618651fc9",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "jvbM5NhnwP5oSyt8",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.waqi.info/feed/hyderabad/?token=d5236a7d87415e8c581849031ba217aa022ec820",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        80,
+        736
+      ],
+      "id": "08cda3ed-7915-47aa-8a67-5a1838d96e23",
+      "name": "HTTP Request3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f5e1827-7687-4133-b477-7bbc6bf73a0a",
+              "name": "data",
+              "value": "={{ $json.data }}",
+              "type": "string"
+            },
+            {
+              "id": "703de8fa-14cb-4300-9640-a595342e48fb",
+              "name": "data.aqi",
+              "value": "={{ $json.data.aqi }}",
+              "type": "number"
+            },
+            {
+              "id": "3ac959c4-092d-4643-b520-c38f138b7d21",
+              "name": "data.city.name",
+              "value": "={{ $json.data.city.name }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        512,
+        800
+      ],
+      "id": "108a0de4-5730-44ab-a4e0-575d57ceb995",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an AI assistant that creates a detailed, human-like Air Quality Update for a daily SMS or WhatsApp message.\n\nYour job is to take the following JSON data and produce a message that:\n- Summarizes the air quality clearly\n- Explains what the AQI value means\n- Mentions the main pollutant (if available)\n- Gives practical health and lifestyle tips based on the air quality\n- Ends with a short motivational line or friendly closing\n\nHere’s the JSON data:\n{{JSON.stringify($json)}}\n\n---\n\nINSTRUCTIONS:\n\n1. Extract the following:\n   - City name (from \"data.city.name\")\n   - AQI value (from \"data.aqi\")\n   - Dominant pollutant (from \"data.dominentpol\" if available)\n\n2. Determine air quality level:\n   - 0–50 → Excellent 🌿\n   - 51–100 → Moderate 🙂\n   - 101–150 → Unhealthy for Sensitive Groups 😷\n   - 151–200 → Unhealthy 🚫\n   - 201–300 → Very Unhealthy ☠️\n   - 301+ → Hazardous ⚠️\n\n3. Write a **3-paragraph message** (8–10 lines total):\n   - **Paragraph 1:** A friendly greeting and city name + quick summary of air quality.\n   - **Paragraph 2:** Explain what the AQI value means and what the dominant pollutant is doing to the air.\n   - **Paragraph 3:** Give one or two lifestyle or health tips (e.g., “try wearing a mask outdoors”, “avoid morning jogs”, “keep windows closed”), and end with a positive or motivational line like “Take care and breathe easy!” or “Better air days are ahead 🌤”.\n\n4. Keep tone friendly, informative, and conversational — as if it’s coming from a personal assistant or weather bot that cares about the user.\n\n5. Use emojis naturally (no overuse). The message should read like a short daily update, not a formal report.\n\n---\n\nEXAMPLE OUTPUT (for Hyderabad, AQI 139):\n\n🌫 **Air Quality Update for Hyderabad** 🌫  \nHey there! Today’s air quality in Hyderabad is at **AQI 139**, which means the air is **unhealthy for sensitive groups**.  \n\nThe main pollutant today is **PM2.5**, tiny particles that can cause irritation if you’re outdoors for too long. The air might look a little hazy, so if you notice that, it’s not your imagination!  \n\nIf you have asthma or allergies, try to stay indoors when possible and keep windows closed. Drink lots of water and maybe enjoy an indoor workout instead of a jog. Take care of yourself — better, cleaner air is always just a few breezes away 💚\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        816
+      ],
+      "id": "1c6f17f8-14c1-456c-9e88-4c0cb661d200",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        592,
+        1008
+      ],
+      "id": "e11a0d5a-bd28-4132-aa07-c8ca60dd0dd5",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "uGC3uIvyNkEyICmc",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "asrithathota06@gmail.com",
+        "subject": "News Report",
+        "message": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1792,
+        -160
+      ],
+      "id": "3a75bf7a-6146-4621-b9d6-53d11e61432e",
+      "name": "Send a message",
+      "webhookId": "f261b66e-27dd-43ad-825b-5cfd33465d61",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6eSsX4IGFMKJll77",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "={{ $json.output }} {{ $json.output }}",
+        "joinMode": "keepNonMatches",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1520,
+        736
+      ],
+      "id": "fc811192-48a3-4f2f-bc51-6ea838085950",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "sendTo": "asrithathota06@gmail.com",
+        "subject": "Weather+AQI",
+        "message": "={{ $json.finalMessage }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2048,
+        736
+      ],
+      "id": "93d1678f-dbb2-4b04-ad3b-ea37448a8f76",
+      "name": "Send a message1",
+      "webhookId": "6cb0c81d-455c-4673-81e4-5578ff14cfea",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "6eSsX4IGFMKJll77",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    finalMessage: items.map(i => i.json.output).join(\"\\n\\n\")\n  }\n}];\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1808,
+        736
+      ],
+      "id": "1054846a-08f2-4b4e-ad46-2a418b175208",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "chatId": "6824897484",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1760,
+        464
+      ],
+      "id": "8b30ca94-a95a-427a-9a65-1e25a71e5184",
+      "name": "Send a text message",
+      "webhookId": "8b6a3607-b342-4851-aaf2-a73cd06eea15",
+      "credentials": {
+        "telegramApi": {
+          "id": "ehmPkL3faXS5xYV5",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Format Weather",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Weather": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain2": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Send an SMS/MMS/WhatsApp message": {
+      "main": [
+        []
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4760e791-c1c9-4e07-9791-b37629c4e8b2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "7f31392d72ddac1aa554ea434a86feca79e3ea0337319c53683a0d77513df058"
+  },
+  "id": "ojfgkzs5TmF1vSFT",
+  "tags": []
+}
