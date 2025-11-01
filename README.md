@@ -227,12 +227,12 @@ You can easily expand this workflow with more smart features and integrations:
 
 ---
 
-
 ## 🎬 Demo
 
 Check out the Automated Daily Digest Workflow in action!  
 
 [![Watch the Demo Video](https://img.shields.io/badge/▶️-Watch%20Demo-blue)](https://github.com/ThotaSriLakshmiAsritha/Automated-Daily-Digest-Workflow/raw/main/video%20demo.mp4)
+
 
 
 
